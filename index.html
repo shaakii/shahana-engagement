@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>For Shahana ♡</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Mono:wght@300;400&family=Great+Vibes&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --cream: #f7f1e7;
+      --soft: #fffaf2;
+      --gold: #c7a46b;
+      --dark: #171411;
+      --muted: #9b8e7e;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      background: var(--dark);
+      color: var(--soft);
+      font-family: "Cormorant Garamond", serif;
+    }
+
+    /* ---------------- LOADER ---------------- */
+
+    .loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at center, #24201b 0%, #100f0d 65%, #080807 100%);
+      transition:
+        opacity 1.2s ease,
+        visibility 1.2s ease;
+    }
+
+    .loader.hide {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-content {
+      text-align: center;
+      position: relative;
+    }
+
+    .loader-ring {
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      border: 1px solid rgba(199, 164, 107, 0.25);
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      animation: rotate 10s linear infinite;
+    }
+
+    .loader-ring::before {
+      content: "";
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: var(--gold);
+      border-radius: 50%;
+      top: -3px;
+      left: 50%;
+      box-shadow: 0 0 18px var(--gold);
+    }
+
+    .loader-small {
+      font-family: "DM Mono", monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 5px;
+      color: var(--muted);
+      margin-bottom: 22px;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.5s;
+    }
+
+    .loader-title {
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(55px, 10vw, 90px);
+      font-weight: 400;
+      color: var(--cream);
+      opacity: 0;
+      animation: fadeUp 1.3s ease forwards 1s;
+    }
+
+    .loader-heart {
+      margin-top: 20px;
+      color: var(--gold);
+      font-size: 15px;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 1.7s;
+    }
+
+    .loader-line {
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      margin: 28px auto 0;
+      animation: lineGrow 2s ease forwards 2s;
+    }
+
+    /* ---------------- EXPERIENCE ---------------- */
+
+    .experience {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    .experience.show {
+      opacity: 1;
+    }
+
+    .background {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(12, 10, 8, 0.82),
+          rgba(12, 10, 8, 0.42),
+          rgba(12, 10, 8, 0.72)
+        ),
+        url("wide_cinematic_soft_focus_romantic_warm_toned.png")
+        center / cover no-repeat;
+
+      transform: scale(1.04);
+      animation: slowZoom 18s ease forwards;
+    }
+
+    .background::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          circle at center,
+          transparent 0%,
+          rgba(0, 0, 0, 0.15) 50%,
+          rgba(0, 0, 0, 0.55) 100%
+        );
+    }
+
+    /* ---------------- NAV ---------------- */
+
+    .top {
+      position: absolute;
+      top: 32px;
+      left: 45px;
+      right: 45px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 5;
+    }
+
+    .top-logo {
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+    }
+
+    .top-heart {
+      color: var(--gold);
+      font-size: 16px;
+    }
+
+    /* ---------------- SLIDES ---------------- */
+
+    .slides {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+
+      padding: 30px;
+
+      opacity: 0;
+      visibility: hidden;
+
+      transform: translateY(25px) scale(0.98);
+
+      transition:
+        opacity 1.2s ease,
+        transform 1.2s ease,
+        visibility 1.2s ease;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .message {
+      max-width: 850px;
+    }
+
+    .eyebrow {
+      font-family: "DM Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      font-size: 10px;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 30px;
+    }
+
+    .message h1 {
+      font-size: clamp(38px, 6vw, 72px);
+      line-height: 1.08;
+      font-weight: 300;
+      letter-spacing: -1px;
+    }
+
+    .message h1 em {
+      color: #e4c58f;
+      font-style: normal;
+    }
+
+    .message p {
+      max-width: 720px;
+      margin: 35px auto 0;
+      font-size: clamp(19px, 2vw, 25px);
+      line-height: 1.6;
+      font-weight: 300;
+      color: rgba(255,255,255,0.83);
+    }
+
+    .ornament {
+      margin: 35px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .ornament span {
+      width: 55px;
+      height: 1px;
+      background: rgba(199,164,107,0.55);
+    }
+
+    .ornament b {
+      color: var(--gold);
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    /* ---------------- FINAL ---------------- */
+
+    .final {
+      background:
+        linear-gradient(
+          90deg,
+          rgba(15, 11, 7, 0.75),
+          rgba(15, 11, 7, 0.35),
+          rgba(15, 11, 7, 0.78)
+        ),
+        url("wide_cinematic_soft_focus_romantic_warm_toned.png")
+        center / cover no-repeat;
+    }
+
+    .final .message {
+      max-width: 950px;
+    }
+
+    .final-small {
+      font-family: "DM Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 7px;
+      font-size: 10px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 25px;
+    }
+
+    .final h1 {
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(65px, 10vw, 125px);
+      font-weight: 400;
+      color: #f9ead0;
+      line-height: 1;
+    }
+
+    .names {
+      margin-top: 18px;
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 7px;
+      text-transform: uppercase;
+      color: #e5c58d;
+    }
+
+    .final-message {
+      max-width: 650px;
+      margin: 38px auto 0;
+      font-size: clamp(18px, 2vw, 23px);
+      line-height: 1.7;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .dua {
+      margin-top: 30px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      font-style: italic;
+    }
+
+    /* ---------------- PROGRESS ---------------- */
+
+    .progress {
+      position: absolute;
+      bottom: 35px;
+      left: 45px;
+      right: 45px;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .progress-label {
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.5);
+      white-space: nowrap;
+    }
+
+    .progress-line {
+      height: 1px;
+      flex: 1;
+      background: rgba(255,255,255,0.15);
+      position: relative;
+    }
+
+    .progress-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0%;
+      background: var(--gold);
+      transition: width 0.8s ease;
+    }
+
+    /* ---------------- PARTICLES ---------------- */
+
+    .particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(255, 231, 187, 0.6);
+      border-radius: 50%;
+      animation: floatParticle linear infinite;
+    }
+
+    /* ---------------- BUTTON ---------------- */
+
+    .continue {
+      position: absolute;
+      bottom: 70px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,0.7);
+
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+
+      cursor: pointer;
+
+      transition: color 0.3s ease;
+    }
+
+    .continue:hover {
+      color: var(--gold);
+    }
+
+    .continue::after {
+      content: "";
+      display: block;
+      width: 35px;
+      height: 1px;
+      margin: 9px auto 0;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+
+    .continue:hover::after {
+      width: 60px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* ---------------- ANIMATIONS ---------------- */
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes lineGrow {
+      to {
+        width: 80px;
+      }
+    }
+
+    @keyframes rotate {
+      to {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    @keyframes slowZoom {
+      from {
+        transform: scale(1.04);
+      }
+
+      to {
+        transform: scale(1.12);
+      }
+    }
+
+    @keyframes floatParticle {
+      from {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.7;
+      }
+
+      90% {
+        opacity: 0.4;
+      }
+
+      to {
+        transform: translateY(-10vh);
+        opacity: 0;
+      }
+    }
+
+    /* ---------------- MOBILE ---------------- */
+
+    @media (max-width: 600px) {
+
+      .top {
+        top: 24px;
+        left: 22px;
+        right: 22px;
+      }
+
+      .progress {
+        left: 22px;
+        right: 22px;
+        bottom: 25px;
+      }
+
+      .continue {
+        bottom: 55px;
+      }
+
+      .message h1 {
+        font-size: 39px;
+      }
+
+      .message p {
+        font-size: 18px;
+        line-height: 1.55;
+      }
+
+      .loader-ring {
+        width: 175px;
+        height: 175px;
+      }
+
+      .final h1 {
+        font-size: 70px;
+      }
+
+      .names {
+        font-size: 9px;
+        letter-spacing: 4px;
+      }
+
+      .final-message {
+        font-size: 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= LOADER ================= -->
+
+  <div class="loader" id="loader">
+
+    <div class="loader-content">
+
+      <div class="loader-ring"></div>
+
+      <div class="loader-small">
+        A little something for you
+      </div>
+
+      <div class="loader-title">
+        hei shahana
+      </div>
+
+      <div class="loader-heart">
+        ♡
+      </div>
+
+      <div class="loader-line"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= WEBSITE ================= -->
+
+  <main class="experience" id="experience">
+
+    <div class="background"></div>
+
+    <div class="particles" id="particles"></div>
+
+    <div class="top">
+
+      <div class="top-logo">
+        For Shahana
+      </div>
+
+      <div class="top-heart">
+        ♡
+      </div>
+
+    </div>
+
+
+    <div class="slides">
+
+
+      <!-- MESSAGE 1 -->
+
+      <section class="slide active">
+
+        <div class="message">
+
+          <div class="eyebrow">
+            A little reminder
+          </div>
+
+          <h1>
+            Everything will be <em>okay.</em>
+          </h1>
+
+          <p>
+            Allah gives you what your heart truly needs,
+            even when the journey doesn't look the way
+            you imagined it would.
+          </p>
+
+          <div class="ornament">
+            <span></span>
+            <b>♡</b>
+            <span></span>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- MESSAGE 2 -->
+
+      <section class="slide">
+
+        <div class="message">
+
+          <div class="eyebrow">
+            Something I hope you never forget
+          </div>
+
+          <h1>
+            You have a <em>beautiful soul.</em>
+          </h1>
+
+          <p>
+            You have this beautiful way of making people
+            feel happy, even when they are carrying their
+            own sadness and bad days.
+            <br><br>
+            You make life feel a little lighter for the
+            people around you.
+          </p>
+
+          <div class="ornament">
+            <span></span>
+            <b>♡</b>
+            <span></span>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- MESSAGE 3 -->
+
+      <section class="slide">
+
+        <div class="message">
+
+          <div class="eyebrow">
+            And honestly...
+          </div>
+
+          <h1>
+            You are one of the <em>best people</em>
+            I have ever known.
+          </h1>
+
+          <p>
+            I genuinely value you, care about you,
+            and respect the person you are.
+            <br><br>
+            Some people simply leave the world a little
+            better by being in it.
+            You are one of those people.
+          </p>
+
+          <div class="ornament">
+            <span></span>
+            <b>♡</b>
+            <span></span>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- FINAL -->
+
+      <section class="slide final">
+
+        <div class="message">
+
+          <div class="final-small">
+            A beautiful new chapter begins
+          </div>
+
+          <h1>
+            Happy Engagement
+          </h1>
+
+          <div class="names">
+            Shahana &nbsp; ♡ &nbsp; Faris
+          </div>
+
+          <p class="final-message">
+            May Allah bless this beautiful beginning
+            and fill your journey together with love,
+            peace, happiness and countless beautiful
+            moments.
+            <br><br>
+            You both deserve a life filled with
+            goodness, understanding and Love.
+          </p>
+
+          <div class="dua">
+            May everything you've wished for find its way to you. ♡
+          </div>
+
+          <div class="ornament">
+            <span></span>
+            <b>♡</b>
+            <span></span>
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+
+    <!-- PROGRESS -->
+
+    <div class="progress">
+
+      <div class="progress-label" id="progressLabel">
+        01 / 04
+      </div>
+
+      <div class="progress-line">
+        <div
+          class="progress-fill"
+          id="progressFill"
+        ></div>
+      </div>
+
+    </div>
+
+
+    <!-- CONTINUE -->
+
+    <button
+      class="continue"
+      id="continueBtn"
+    >
+      Continue
+    </button>
+
+  </main>
+
+
+  <script>
+
+    /* ========================================
+       SETUP
+    ======================================== */
+
+    const loader = document.getElementById("loader");
+    const experience = document.getElementById("experience");
+
+    const slides = document.querySelectorAll(".slide");
+
+    const continueBtn =
+      document.getElementById("continueBtn");
+
+    const progressFill =
+      document.getElementById("progressFill");
+
+    const progressLabel =
+      document.getElementById("progressLabel");
+
+    let currentSlide = 0;
+
+
+    /* ========================================
+       LOADER
+    ======================================== */
+
+    window.addEventListener("load", () => {
+
+      setTimeout(() => {
+
+        loader.classList.add("hide");
+
+        experience.classList.add("show");
+
+        updateProgress();
+
+      }, 4200);
+
+    });
+
+
+    /* ========================================
+       SLIDE SYSTEM
+    ======================================== */
+
+    function showSlide(index) {
+
+      slides.forEach((slide, i) => {
+
+        slide.classList.toggle(
+          "active",
+          i === index
+        );
+
+      });
+
+      currentSlide = index;
+
+      updateProgress();
+
+      if (currentSlide === slides.length - 1) {
+
+        continueBtn.classList.add("hidden");
+
+      } else {
+
+        continueBtn.classList.remove("hidden");
+
+      }
+
+    }
+
+
+    function updateProgress() {
+
+      const total = slides.length;
+
+      const current = currentSlide + 1;
+
+      const percentage =
+        (current / total) * 100;
+
+      progressFill.style.width =
+        percentage + "%";
+
+      progressLabel.textContent =
+        String(current).padStart(2, "0")
+        + " / "
+        + String(total).padStart(2, "0");
+
+    }
+
+
+    /* ========================================
+       BUTTON
+    ======================================== */
+
+    continueBtn.addEventListener("click", () => {
+
+      if (currentSlide < slides.length - 1) {
+
+        showSlide(currentSlide + 1);
+
+      }
+
+    });
+
+
+    /* ========================================
+       CLICK ANYWHERE TO CONTINUE
+    ======================================== */
+
+    document.addEventListener("click", (event) => {
+
+      if (
+        !experience.classList.contains("show") ||
+        event.target.closest("button")
+      ) {
+        return;
+      }
+
+      if (currentSlide < slides.length - 1) {
+
+        showSlide(currentSlide + 1);
+
+      }
+
+    });
+
+
+    /* ========================================
+       KEYBOARD
+    ======================================== */
+
+    document.addEventListener("keydown", (event) => {
+
+      if (
+        event.key === "ArrowRight" ||
+        event.key === " "
+      ) {
+
+        if (currentSlide < slides.length - 1) {
+
+          showSlide(currentSlide + 1);
+
+        }
+
+      }
+
+      if (event.key === "ArrowLeft") {
+
+        if (currentSlide > 0) {
+
+          showSlide(currentSlide - 1);
+
+        }
+
+      }
+
+    });
+
+
+    /* ========================================
+       TOUCH SWIPE
+    ======================================== */
+
+    let touchStartX = 0;
+
+    let touchEndX = 0;
+
+
+    document.addEventListener("touchstart", (event) => {
+
+      touchStartX =
+        event.changedTouches[0].screenX;
+
+    });
+
+
+    document.addEventListener("touchend", (event) => {
+
+      touchEndX =
+        event.changedTouches[0].screenX;
+
+      const difference =
+        touchStartX - touchEndX;
+
+      if (Math.abs(difference) < 50) return;
+
+
+      if (difference > 0) {
+
+        if (currentSlide < slides.length - 1) {
+
+          showSlide(currentSlide + 1);
+
+        }
+
+      } else {
+
+        if (currentSlide > 0) {
+
+          showSlide(currentSlide - 1);
+
+        }
+
+      }
+
+    });
+
+
+    /* ========================================
+       FLOATING PARTICLES
+    ======================================== */
+
+    const particles =
+      document.getElementById("particles");
+
+
+    for (let i = 0; i < 35; i++) {
+
+      const particle =
+        document.createElement("div");
+
+      particle.className = "particle";
+
+      particle.style.left =
+        Math.random() * 100 + "%";
+
+      particle.style.animationDuration =
+        8 + Math.random() * 12 + "s";
+
+      particle.style.animationDelay =
+        Math.random() * 10 + "s";
+
+      particle.style.opacity =
+        Math.random();
+
+      particles.appendChild(particle);
+
+    }
+
+  </script>
+
+</body>
+</html>
