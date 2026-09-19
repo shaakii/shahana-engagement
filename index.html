@@ -7,21 +7,27 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@300;400&family=Great+Vibes&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Mono:wght@300;400&family=Great+Vibes&display=swap"
     rel="stylesheet"
   />
 
   <style>
+    /* ---------- PREMIUM WHITE & GOLD THEME ---------- */
     :root {
-      --cream: #f7f1e7;
-      --soft: #fffaf2;
-      --gold: #c7a46b;
-      --gold-light: #e4c58f;
-      --gold-glow: rgba(199, 164, 107, 0.4);
-      --dark: #171411;
-      --muted: #9b8e7e;
+      --bg-white: #ffffff;
+      --bg-cream: #fefcf9;
+      --bg-warm: #faf6f0;
+      --gold: #b8945f;
+      --gold-rich: #a67c3e;
+      --gold-light: #dbbd8a;
+      --gold-soft: #e8d5b8;
+      --text-dark: #1f1a15;
+      --text-soft: #4a4038;
+      --text-muted: #8a7b6b;
+      --shadow-soft: 0 20px 45px -18px rgba(140, 110, 70, 0.18);
+      --shadow-hover: 0 30px 60px -18px rgba(140, 110, 70, 0.28);
+      --glow-gold: 0 0 30px rgba(184, 148, 95, 0.15);
     }
 
     * {
@@ -30,21 +36,20 @@
       box-sizing: border-box;
     }
 
-    html, body {
+    html,
+    body {
       width: 100%;
       height: 100%;
       overflow: hidden;
     }
 
     body {
-      background: var(--dark);
-      color: var(--soft);
+      background: var(--bg-white);
+      color: var(--text-dark);
       font-family: "Cormorant Garamond", serif;
-      -webkit-font-smoothing: antialiased;
     }
 
     /* ---------------- LOADER ---------------- */
-
     .loader {
       position: fixed;
       inset: 0;
@@ -52,15 +57,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background:
-        radial-gradient(circle at center, #24201b 0%, #100f0d 65%, #080807 100%);
+      background: radial-gradient(circle at 30% 30%, #ffffff, #fdf8f2 70%, #f5ede2 100%);
       transition: opacity 1.4s ease, visibility 1.4s ease;
     }
 
     .loader.hide {
       opacity: 0;
       visibility: hidden;
-      pointer-events: none;
     }
 
     .loader-content {
@@ -70,9 +73,9 @@
 
     .loader-ring {
       position: absolute;
-      width: 210px;
-      height: 210px;
-      border: 1px solid rgba(199, 164, 107, 0.25);
+      width: 200px;
+      height: 200px;
+      border: 1.5px solid rgba(184, 148, 95, 0.25);
       border-radius: 50%;
       left: 50%;
       top: 50%;
@@ -83,33 +86,34 @@
     .loader-ring::before {
       content: "";
       position: absolute;
-      width: 5px;
-      height: 5px;
+      width: 7px;
+      height: 7px;
       background: var(--gold);
       border-radius: 50%;
-      top: -3px;
+      top: -4px;
       left: 50%;
-      box-shadow: 0 0 18px var(--gold), 0 0 40px var(--gold-glow);
+      box-shadow: 0 0 20px rgba(184, 148, 95, 0.9);
     }
 
     .loader-ring::after {
       content: "";
       position: absolute;
-      width: 3px;
-      height: 3px;
-      background: var(--gold-light);
+      width: 120px;
+      height: 120px;
+      border: 1px solid rgba(184, 148, 95, 0.12);
       border-radius: 50%;
-      bottom: -2px;
       left: 50%;
-      box-shadow: 0 0 12px var(--gold);
+      top: 50%;
+      transform: translate(-50%, -50%);
+      animation: rotate 6s linear infinite reverse;
     }
 
     .loader-small {
       font-family: "DM Mono", monospace;
       text-transform: uppercase;
       font-size: 10px;
-      letter-spacing: 5px;
-      color: var(--muted);
+      letter-spacing: 6px;
+      color: var(--text-muted);
       margin-bottom: 22px;
       opacity: 0;
       animation: fadeUp 1s ease forwards 0.5s;
@@ -119,497 +123,511 @@
       font-family: "Great Vibes", cursive;
       font-size: clamp(55px, 10vw, 90px);
       font-weight: 400;
-      color: var(--cream);
+      color: var(--gold);
       opacity: 0;
       animation: fadeUp 1.3s ease forwards 1s;
-      text-shadow: 0 0 40px rgba(199, 164, 107, 0.15);
+      text-shadow: 0 3px 20px rgba(184, 148, 95, 0.2);
     }
 
     .loader-heart {
       margin-top: 20px;
       color: var(--gold);
-      font-size: 15px;
+      font-size: 20px;
       opacity: 0;
-      animation: fadeUp 1s ease forwards 1.7s, pulseHeart 2.2s ease-in-out infinite 2.5s;
+      animation: fadeUp 1s ease forwards 1.7s;
+      animation: heartBeat 1.4s ease-in-out infinite 1.7s;
     }
 
     .loader-line {
       width: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
       margin: 28px auto 0;
       animation: lineGrow 2s ease forwards 2s;
     }
 
     /* ---------------- EXPERIENCE ---------------- */
-
     .experience {
       position: relative;
       width: 100%;
       height: 100%;
       opacity: 0;
-      transition: opacity 1.5s ease;
+      transition: opacity 1.8s ease;
+      background: var(--bg-cream);
     }
 
     .experience.show {
       opacity: 1;
     }
 
-    .background {
+    /* Premium background pattern */
+    .bg-pattern {
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(
-          90deg,
-          rgba(12, 10, 8, 0.82),
-          rgba(12, 10, 8, 0.38),
-          rgba(12, 10, 8, 0.72)
-        ),
-        url("wide_cinematic_soft_focus_romantic_warm_toned.png")
-        center / cover no-repeat;
-
-      transform: scale(1.04);
-      animation: slowZoom 22s ease forwards;
+        radial-gradient(circle at 15% 25%, rgba(255, 245, 235, 0.6) 0%, transparent 45%),
+        radial-gradient(circle at 85% 75%, rgba(245, 235, 220, 0.5) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(255, 250, 242, 0.3) 0%, transparent 70%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Ccircle cx='40' cy='40' r='0.6' fill='%23e8ddd0' opacity='0.25'/%3E%3C/svg%3E")
+        center / 100px repeat;
+      pointer-events: none;
     }
 
-    .background::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(
-          circle at center,
-          transparent 0%,
-          rgba(0, 0, 0, 0.18) 50%,
-          rgba(0, 0, 0, 0.58) 100%
-        );
-    }
-
-    /* ---------------- NAV ---------------- */
-
-    .top {
-      position: absolute;
-      top: 32px;
-      left: 45px;
-      right: 45px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 5;
-    }
-
-    .top-logo {
-      font-family: "DM Mono", monospace;
-      font-size: 10px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.65);
-    }
-
-    .top-heart {
-      color: var(--gold);
-      font-size: 16px;
-      animation: pulseHeart 2.6s ease-in-out infinite;
-    }
-
-    /* ---------------- SLIDES ---------------- */
-
-    .slides {
+    /* ---------------- TIMELINE ---------------- */
+    .timeline {
       position: relative;
       width: 100%;
       height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      perspective: 1200px;
+    }
+
+    .timeline::-webkit-scrollbar {
+      display: none;
+    }
+
+    .timeline-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100%;
+      padding: 100px 25px 160px;
+      position: relative;
       z-index: 2;
     }
 
-    .slide {
-      position: absolute;
-      inset: 0;
+    /* ---------------- PROGRESS LINE ---------------- */
+    .timeline-line {
+      position: fixed;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(184, 148, 95, 0.08);
+      transform: translateX(-50%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .timeline-progress {
+      position: fixed;
+      left: 50%;
+      top: 0;
+      width: 2px;
+      height: 0%;
+      background: linear-gradient(to bottom, var(--gold-light), var(--gold-rich));
+      transform: translateX(-50%);
+      z-index: 2;
+      pointer-events: none;
+      transition: height 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      box-shadow: 0 0 20px rgba(184, 148, 95, 0.5), 0 0 40px rgba(184, 148, 95, 0.2);
+      border-radius: 2px;
+    }
+
+    /* ---------------- SCROLL HINT ---------------- */
+    .scroll-hint {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      color: var(--text-muted);
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 30px;
+      gap: 10px;
+      opacity: 1;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      pointer-events: none;
+    }
+
+    .scroll-hint.fade {
       opacity: 0;
-      visibility: hidden;
-      transform: translateY(28px) scale(0.985);
+      transform: translateX(-50%) translateY(15px);
+    }
+
+    .scroll-hint-line {
+      width: 1.5px;
+      height: 35px;
+      background: linear-gradient(to bottom, var(--gold-light), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+      border-radius: 2px;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+
+    /* ---------------- MESSAGE CARDS (Premium) ---------------- */
+    .msg-card {
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto 90px;
+      padding: 4rem 3.5rem;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px) saturate(1.1);
+      -webkit-backdrop-filter: blur(12px) saturate(1.1);
+      border-radius: 44px 14px 44px 14px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(232, 213, 184, 0.6);
+      text-align: center;
+      opacity: 0;
+      transform: translateY(60px) scale(0.92) rotateX(4deg);
       transition:
         opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
         transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
-        visibility 1.2s ease;
-    }
-
-    .slide.active {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0) scale(1);
-    }
-
-    .message {
-      max-width: 850px;
+        box-shadow 0.5s ease,
+        border-color 0.5s ease;
       position: relative;
+      will-change: transform, opacity;
+      transform-style: preserve-3d;
     }
 
-    .message::before {
+    .msg-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1) rotateX(0deg);
+    }
+
+    .msg-card:hover {
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(184, 148, 95, 0.4);
+    }
+
+    /* Gold shimmer line on top of card */
+    .msg-card::before {
       content: "";
       position: absolute;
-      top: -20%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 340px;
-      height: 340px;
-      background: radial-gradient(circle, rgba(199,164,107,0.08) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: -1;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold-light), var(--gold), var(--gold-light), transparent);
+      border-radius: 2px;
+      opacity: 0;
+      transition: opacity 0.6s ease;
     }
 
-    .eyebrow {
+    .msg-card.visible::before {
+      opacity: 1;
+    }
+
+    /* Subtle glow behind card */
+    .msg-card::after {
+      content: "";
+      position: absolute;
+      inset: -20px;
+      border-radius: 60px 20px 60px 20px;
+      background: radial-gradient(ellipse at center, rgba(184, 148, 95, 0.06) 0%, transparent 70%);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .msg-card.visible::after {
+      opacity: 1;
+    }
+
+    .msg-card .eyebrow {
       font-family: "DM Mono", monospace;
       text-transform: uppercase;
-      letter-spacing: 5px;
+      letter-spacing: 6px;
       font-size: 10px;
-      color: rgba(255,255,255,0.5);
+      color: var(--gold-rich);
       margin-bottom: 30px;
+      opacity: 0.85;
     }
 
-    .message h1 {
-      font-size: clamp(38px, 6vw, 72px);
-      line-height: 1.08;
+    .msg-card h2 {
+      font-size: clamp(34px, 5.5vw, 62px);
+      line-height: 1.12;
+      font-weight: 400;
+      letter-spacing: -0.5px;
+      color: var(--text-dark);
+      text-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .msg-card h2 em {
+      color: var(--gold-rich);
+      font-style: italic;
+      font-weight: 500;
+      text-shadow: 0 2px 12px rgba(184, 148, 95, 0.2);
+    }
+
+    .msg-card p {
+      max-width: 600px;
+      margin: 32px auto 0;
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.65;
       font-weight: 300;
-      letter-spacing: -1px;
+      color: var(--text-soft);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.02);
     }
 
-    .message h1 em {
-      color: var(--gold-light);
-      font-style: normal;
-      text-shadow: 0 0 30px rgba(199, 164, 107, 0.25);
-    }
-
-    .message p {
-      max-width: 720px;
-      margin: 35px auto 0;
-      font-size: clamp(19px, 2vw, 25px);
-      line-height: 1.6;
-      font-weight: 300;
-      color: rgba(255,255,255,0.83);
-    }
-
-    .ornament {
-      margin: 35px auto 0;
+    .msg-card .ornament {
+      margin: 36px auto 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 15px;
+      gap: 16px;
     }
 
-    .ornament span {
+    .msg-card .ornament span {
       width: 55px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(199,164,107,0.55), transparent);
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
     }
 
-    .ornament b {
-      color: var(--gold);
-      font-size: 14px;
+    .msg-card .ornament b {
+      color: var(--gold-rich);
+      font-size: 18px;
       font-weight: 400;
-      animation: pulseHeart 2.4s ease-in-out infinite;
+      filter: drop-shadow(0 0 6px rgba(184, 148, 95, 0.3));
     }
 
-    /* ---------------- FINAL ---------------- */
-
-    .final {
-      background:
-        linear-gradient(
-          90deg,
-          rgba(15, 11, 7, 0.75),
-          rgba(15, 11, 7, 0.3),
-          rgba(15, 11, 7, 0.78)
-        ),
-        url("wide_cinematic_soft_focus_romantic_warm_toned.png")
-        center / cover no-repeat;
+    /* ---------------- FINAL CARD ---------------- */
+    .final-card {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(220, 190, 150, 0.5);
+      max-width: 820px;
     }
 
-    .final .message {
-      max-width: 950px;
-    }
-
-    .final-small {
+    .final-card .final-small {
       font-family: "DM Mono", monospace;
       text-transform: uppercase;
-      letter-spacing: 7px;
+      letter-spacing: 8px;
       font-size: 10px;
-      color: rgba(255,255,255,0.55);
-      margin-bottom: 25px;
+      color: var(--gold-rich);
+      margin-bottom: 28px;
     }
 
-    .final h1 {
+    .final-card h2 {
       font-family: "Great Vibes", cursive;
-      font-size: clamp(65px, 10vw, 125px);
+      font-size: clamp(62px, 9.5vw, 120px);
       font-weight: 400;
-      color: #f9ead0;
-      line-height: 1;
-      text-shadow: 0 0 60px rgba(199, 164, 107, 0.3);
+      color: var(--gold-rich);
+      line-height: 1.08;
+      text-shadow: 0 5px 25px rgba(184, 148, 95, 0.25);
     }
 
-    .names {
-      margin-top: 18px;
+    .final-card .names {
+      margin-top: 20px;
       font-family: "DM Mono", monospace;
-      font-size: 12px;
-      letter-spacing: 7px;
+      font-size: 13px;
+      letter-spacing: 8px;
       text-transform: uppercase;
-      color: #e5c58d;
+      color: var(--text-dark);
+      background: linear-gradient(135deg, rgba(255, 240, 220, 0.8), rgba(255, 248, 238, 0.9));
+      display: inline-block;
+      padding: 10px 26px;
+      border-radius: 50px;
+      border: 1px solid rgba(220, 190, 150, 0.4);
+      box-shadow: 0 4px 15px rgba(184, 148, 95, 0.1);
     }
 
-    .final-message {
-      max-width: 650px;
+    .final-card .final-msg {
+      max-width: 600px;
       margin: 38px auto 0;
       font-size: clamp(18px, 2vw, 23px);
       line-height: 1.7;
-      color: rgba(255,255,255,0.85);
+      color: var(--text-soft);
     }
 
-    .dua {
+    .final-card .dua {
       margin-top: 30px;
-      font-size: 14px;
-      color: rgba(255,255,255,0.5);
+      font-size: 17px;
+      color: var(--gold-rich);
       font-style: italic;
-      letter-spacing: 0.5px;
+      font-weight: 400;
+      text-shadow: 0 2px 8px rgba(184, 148, 95, 0.15);
     }
 
-    /* ---------------- PROGRESS ---------------- */
-
-    .progress {
-      position: absolute;
-      bottom: 35px;
-      left: 45px;
-      right: 45px;
-      z-index: 5;
-      display: flex;
-      align-items: center;
-      gap: 20px;
+    /* ---------------- GOODBYE SECTION ---------------- */
+    .goodbye-section {
+      width: 100%;
+      max-width: 720px;
+      margin: 30px auto 0;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(50px) scale(0.95);
+      transition: opacity 1.8s cubic-bezier(0.22, 1, 0.36, 1), transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
     }
 
-    .progress-label {
+    .goodbye-section.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .goodbye-text {
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(50px, 8vw, 95px);
+      color: var(--gold-rich);
+      line-height: 1.15;
+      text-shadow: 0 6px 30px rgba(184, 148, 95, 0.25);
+      margin-bottom: 18px;
+    }
+
+    .goodbye-sub {
       font-family: "DM Mono", monospace;
-      font-size: 9px;
-      letter-spacing: 2px;
-      color: rgba(255,255,255,0.45);
-      white-space: nowrap;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 8px;
+      color: var(--text-muted);
     }
 
-    .progress-line {
-      height: 1px;
-      flex: 1;
-      background: rgba(255,255,255,0.12);
-      position: relative;
-      border-radius: 1px;
-      overflow: hidden;
+    /* ---------------- FADE TO BLACK ---------------- */
+    .fade-overlay {
+      position: fixed;
+      inset: 0;
+      background: #000000;
+      z-index: 9998;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .progress-fill {
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--gold), var(--gold-light));
-      transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-      box-shadow: 0 0 8px var(--gold-glow);
+    .fade-overlay.active {
+      opacity: 1;
+      pointer-events: all;
     }
 
     /* ---------------- PARTICLES ---------------- */
-
     .particles {
-      position: absolute;
+      position: fixed;
       inset: 0;
       overflow: hidden;
-      z-index: 1;
+      z-index: 0;
       pointer-events: none;
     }
 
     .particle {
       position: absolute;
-      width: 2px;
-      height: 2px;
-      background: rgba(255, 231, 187, 0.55);
+      background: rgba(212, 175, 120, 0.3);
       border-radius: 50%;
       animation: floatParticle linear infinite;
-      will-change: transform, opacity;
-    }
-
-    .particle:nth-child(odd) {
-      width: 3px;
-      height: 3px;
-      background: rgba(255, 215, 150, 0.45);
-      box-shadow: 0 0 6px rgba(255, 215, 150, 0.3);
-    }
-
-    /* ---------------- BUTTON ---------------- */
-
-    .continue {
-      position: absolute;
-      bottom: 70px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-
-      border: none;
-      background: transparent;
-      color: rgba(255,255,255,0.65);
-
-      font-family: "DM Mono", monospace;
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: 4px;
-
-      cursor: pointer;
-      transition: color 0.3s ease, transform 0.3s ease;
-      animation: fadeUp 1.2s ease forwards 0.8s;
-      opacity: 0;
-    }
-
-    .continue:hover {
-      color: var(--gold);
-      transform: translateX(-50%) translateY(-2px);
-    }
-
-    .continue::after {
-      content: "";
-      display: block;
-      width: 35px;
-      height: 1px;
-      margin: 9px auto 0;
-      background: var(--gold);
-      transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .continue:hover::after {
-      width: 60px;
-    }
-
-    .hidden {
-      display: none !important;
+      box-shadow: 0 0 10px rgba(212, 175, 120, 0.25);
     }
 
     /* ---------------- ANIMATIONS ---------------- */
-
     @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes lineGrow {
-      to {
-        width: 80px;
-      }
+      to { width: 90px; }
     }
 
     @keyframes rotate {
-      to {
-        transform: translate(-50%, -50%) rotate(360deg);
-      }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
     }
 
-    @keyframes slowZoom {
-      from {
-        transform: scale(1.04);
-      }
-      to {
-        transform: scale(1.12);
-      }
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
     }
 
     @keyframes floatParticle {
-      from {
-        transform: translateY(110vh);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.7;
-      }
-      90% {
-        opacity: 0.35;
-      }
-      to {
-        transform: translateY(-10vh);
-        opacity: 0;
-      }
+      from { transform: translateY(110vh) scale(0.6) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.7; }
+      90% { opacity: 0.2; }
+      to { transform: translateY(-10vh) scale(1.3) rotate(360deg); opacity: 0; }
     }
 
-    @keyframes pulseHeart {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 0.8;
-      }
-      50% {
-        transform: scale(1.15);
-        opacity: 1;
-      }
+    /* ---------------- SCROLL-DRIVEN GLOW ---------------- */
+    .glow-orb {
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184, 148, 95, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      transition: transform 1.5s ease-out;
     }
 
-    /* ---------------- MOBILE ---------------- */
+    .glow-orb-1 {
+      top: -100px;
+      left: -100px;
+    }
 
+    .glow-orb-2 {
+      bottom: -100px;
+      right: -100px;
+    }
+
+    /* ---------------- RESPONSIVE ---------------- */
     @media (max-width: 600px) {
-      .top {
-        top: 24px;
-        left: 22px;
-        right: 22px;
+      .timeline-inner {
+        padding: 70px 16px 130px;
       }
 
-      .progress {
-        left: 22px;
-        right: 22px;
-        bottom: 25px;
+      .msg-card {
+        padding: 2.8rem 1.6rem;
+        border-radius: 32px 10px 32px 10px;
+        margin-bottom: 70px;
       }
 
-      .continue {
-        bottom: 55px;
+      .msg-card h2 {
+        font-size: 36px;
       }
 
-      .message h1 {
-        font-size: 39px;
-      }
-
-      .message p {
-        font-size: 18px;
+      .msg-card p {
+        font-size: 17px;
         line-height: 1.55;
       }
 
-      .loader-ring {
-        width: 175px;
-        height: 175px;
+      .final-card h2 {
+        font-size: 64px;
       }
 
-      .final h1 {
-        font-size: 70px;
-      }
-
-      .names {
+      .final-card .names {
         font-size: 9px;
+        letter-spacing: 5px;
+        padding: 8px 18px;
+      }
+
+      .final-card .final-msg {
+        font-size: 16px;
+      }
+
+      .goodbye-text {
+        font-size: 55px;
+      }
+
+      .goodbye-sub {
+        font-size: 9px;
+        letter-spacing: 5px;
+      }
+
+      .loader-ring {
+        width: 160px;
+        height: 160px;
+      }
+
+      .scroll-hint {
+        bottom: 25px;
+      }
+
+      .eyebrow {
         letter-spacing: 4px;
-      }
-
-      .final-message {
-        font-size: 17px;
-      }
-
-      .message::before {
-        width: 240px;
-        height: 240px;
+        font-size: 9px;
       }
     }
   </style>
 </head>
-
 <body>
 
   <!-- ================= LOADER ================= -->
-
   <div class="loader" id="loader">
     <div class="loader-content">
       <div class="loader-ring"></div>
@@ -620,43 +638,50 @@
     </div>
   </div>
 
+  <!-- ================= FADE TO BLACK OVERLAY ================= -->
+  <div class="fade-overlay" id="fadeOverlay"></div>
+
   <!-- ================= WEBSITE ================= -->
-
   <main class="experience" id="experience">
-
-    <div class="background"></div>
+    <div class="bg-pattern"></div>
     <div class="particles" id="particles"></div>
 
-    <div class="top">
-      <div class="top-logo">For Shahana</div>
-      <div class="top-heart">♡</div>
+    <!-- Glow orbs for premium feel -->
+    <div class="glow-orb glow-orb-1" id="glowOrb1"></div>
+    <div class="glow-orb glow-orb-2" id="glowOrb2"></div>
+
+    <!-- Fixed progress line -->
+    <div class="timeline-line"></div>
+    <div class="timeline-progress" id="timelineProgress"></div>
+
+    <!-- Scroll hint -->
+    <div class="scroll-hint" id="scrollHint">
+      <span>scroll</span>
+      <div class="scroll-hint-line"></div>
     </div>
 
-    <div class="slides">
+    <!-- Scrollable timeline -->
+    <div class="timeline" id="timeline">
+      <div class="timeline-inner" id="timelineInner">
 
-      <!-- MESSAGE 1 -->
-      <section class="slide active">
-        <div class="message">
+        <!-- MESSAGE 1 -->
+        <div class="msg-card" data-index="0">
           <div class="eyebrow">A little reminder</div>
-          <h1>Everything will be <em>okay.</em></h1>
+          <h2>Everything will be <em>okay.</em></h2>
           <p>
             Allah gives you what your heart truly needs,
             even when the journey doesn't look the way
             you imagined it would.
           </p>
           <div class="ornament">
-            <span></span>
-            <b>♡</b>
-            <span></span>
+            <span></span><b>♡</b><span></span>
           </div>
         </div>
-      </section>
 
-      <!-- MESSAGE 2 -->
-      <section class="slide">
-        <div class="message">
+        <!-- MESSAGE 2 -->
+        <div class="msg-card" data-index="1">
           <div class="eyebrow">Something I hope you never forget</div>
-          <h1>You have a <em>beautiful soul.</em></h1>
+          <h2>You have a <em>beautiful soul.</em></h2>
           <p>
             You have this beautiful way of making people
             feel happy, even when they are carrying their
@@ -666,18 +691,14 @@
             people around you.
           </p>
           <div class="ornament">
-            <span></span>
-            <b>♡</b>
-            <span></span>
+            <span></span><b>♡</b><span></span>
           </div>
         </div>
-      </section>
 
-      <!-- MESSAGE 3 -->
-      <section class="slide">
-        <div class="message">
+        <!-- MESSAGE 3 -->
+        <div class="msg-card" data-index="2">
           <div class="eyebrow">And honestly...</div>
-          <h1>You are one of the <em>best people</em> I have ever known.</h1>
+          <h2>You are one of the <em>best people</em> I have ever known.</h2>
           <p>
             I genuinely value you, care about you,
             and respect the person you are.
@@ -687,20 +708,16 @@
             You are one of those people.
           </p>
           <div class="ornament">
-            <span></span>
-            <b>♡</b>
-            <span></span>
+            <span></span><b>♡</b><span></span>
           </div>
         </div>
-      </section>
 
-      <!-- FINAL -->
-      <section class="slide final">
-        <div class="message">
+        <!-- FINAL MESSAGE -->
+        <div class="msg-card final-card" data-index="3">
           <div class="final-small">A beautiful new chapter begins</div>
-          <h1>Happy Engagement</h1>
+          <h2>Happy Engagement</h2>
           <div class="names">Shahana &nbsp; ♡ &nbsp; Faris</div>
-          <p class="final-message">
+          <p class="final-msg">
             May Allah bless this beautiful beginning
             and fill your journey together with love,
             peace, happiness and countless beautiful
@@ -713,186 +730,155 @@
             May everything you've wished for find its way to you. ♡
           </div>
           <div class="ornament">
-            <span></span>
-            <b>♡</b>
-            <span></span>
+            <span></span><b>♡</b><span></span>
           </div>
         </div>
-      </section>
 
-    </div>
+        <!-- GOODBYE SECTION -->
+        <div class="goodbye-section" id="goodbyeSection">
+          <div class="goodbye-text">All the best....</div>
+          <div class="goodbye-sub">Bye....</div>
+        </div>
 
-    <!-- PROGRESS -->
-    <div class="progress">
-      <div class="progress-label" id="progressLabel">01 / 04</div>
-      <div class="progress-line">
-        <div class="progress-fill" id="progressFill"></div>
       </div>
     </div>
-
-    <!-- CONTINUE -->
-    <button class="continue" id="continueBtn">Continue</button>
-
   </main>
 
   <script>
     /* ========================================
        SETUP
     ======================================== */
-
     const loader = document.getElementById("loader");
     const experience = document.getElementById("experience");
-    const slides = document.querySelectorAll(".slide");
-    const continueBtn = document.getElementById("continueBtn");
-    const progressFill = document.getElementById("progressFill");
-    const progressLabel = document.getElementById("progressLabel");
+    const timeline = document.getElementById("timeline");
+    const timelineInner = document.getElementById("timelineInner");
+    const timelineProgress = document.getElementById("timelineProgress");
+    const scrollHint = document.getElementById("scrollHint");
+    const goodbyeSection = document.getElementById("goodbyeSection");
+    const fadeOverlay = document.getElementById("fadeOverlay");
+    const cards = document.querySelectorAll(".msg-card");
+    const glowOrb1 = document.getElementById("glowOrb1");
+    const glowOrb2 = document.getElementById("glowOrb2");
 
-    let currentSlide = 0;
-    let isTransitioning = false;
+    let hasScrolled = false;
+    let goodbyeTriggered = false;
 
     /* ========================================
        LOADER
     ======================================== */
-
     window.addEventListener("load", () => {
       setTimeout(() => {
         loader.classList.add("hide");
         experience.classList.add("show");
-        updateProgress();
-      }, 4200);
+        setTimeout(() => checkVisibility(), 400);
+      }, 3800);
     });
 
     /* ========================================
-       SLIDE SYSTEM
+       INTERSECTION OBSERVER FOR CARDS
     ======================================== */
+    const observerOptions = {
+      root: timeline,
+      rootMargin: "0px 0px -10% 0px",
+      threshold: 0.15
+    };
 
-    function showSlide(index) {
-      if (isTransitioning || index < 0 || index >= slides.length) return;
-      isTransitioning = true;
-
-      slides.forEach((slide, i) => {
-        slide.classList.toggle("active", i === index);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
       });
+    }, observerOptions);
 
-      currentSlide = index;
-      updateProgress();
+    cards.forEach((card) => observer.observe(card));
 
-      if (currentSlide === slides.length - 1) {
-        continueBtn.classList.add("hidden");
-      } else {
-        continueBtn.classList.remove("hidden");
+    // Goodbye observer
+    const goodbyeObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !goodbyeTriggered) {
+          goodbyeTriggered = true;
+          goodbyeSection.classList.add("visible");
+          setTimeout(() => {
+            fadeOverlay.classList.add("active");
+          }, 4000);
+        }
+      });
+    }, { root: timeline, threshold: 0.4 });
+
+    goodbyeObserver.observe(goodbyeSection);
+
+    /* ========================================
+       SCROLL PROGRESS + PARALLAX GLOW
+    ======================================== */
+    function updateScrollProgress() {
+      const scrollTop = timeline.scrollTop;
+      const scrollHeight = timeline.scrollHeight - timeline.clientHeight;
+      const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      timelineProgress.style.height = progress + "%";
+
+      // Parallax glow orbs
+      const maxMove = 60;
+      const moveY = (scrollTop / scrollHeight) * maxMove;
+      glowOrb1.style.transform = `translate(${moveY * 0.6}px, ${moveY * 0.8}px)`;
+      glowOrb2.style.transform = `translate(${-moveY * 0.5}px, ${-moveY * 0.7}px)`;
+
+      // Scroll hint fade
+      if (!hasScrolled && scrollTop > 50) {
+        hasScrolled = true;
+        scrollHint.classList.add("fade");
       }
-
-      setTimeout(() => {
-        isTransitioning = false;
-      }, 900);
     }
 
-    function updateProgress() {
-      const total = slides.length;
-      const current = currentSlide + 1;
-      const percentage = (current / total) * 100;
+    timeline.addEventListener("scroll", updateScrollProgress, { passive: true });
 
-      progressFill.style.width = percentage + "%";
-      progressLabel.textContent =
-        String(current).padStart(2, "0") +
-        " / " +
-        String(total).padStart(2, "0");
+    setTimeout(() => {
+      updateScrollProgress();
+      checkVisibility();
+    }, 600);
+
+    function checkVisibility() {
+      cards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        if (rect.top < windowHeight * 0.88) {
+          card.classList.add("visible");
+        }
+      });
     }
 
     /* ========================================
-       BUTTON
+       PARTICLES
     ======================================== */
-
-    continueBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      if (currentSlide < slides.length - 1) {
-        showSlide(currentSlide + 1);
-      }
-    });
-
-    /* ========================================
-       CLICK ANYWHERE TO CONTINUE
-    ======================================== */
-
-    document.addEventListener("click", (event) => {
-      if (
-        !experience.classList.contains("show") ||
-        event.target.closest("button")
-      ) {
-        return;
-      }
-
-      if (currentSlide < slides.length - 1) {
-        showSlide(currentSlide + 1);
-      }
-    });
-
-    /* ========================================
-       KEYBOARD
-    ======================================== */
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "ArrowRight" || event.key === " ") {
-        event.preventDefault();
-        if (currentSlide < slides.length - 1) {
-          showSlide(currentSlide + 1);
-        }
-      }
-
-      if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        if (currentSlide > 0) {
-          showSlide(currentSlide - 1);
-        }
-      }
-    });
-
-    /* ========================================
-       TOUCH SWIPE
-    ======================================== */
-
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    document.addEventListener("touchstart", (event) => {
-      touchStartX = event.changedTouches[0].screenX;
-    }, { passive: true });
-
-    document.addEventListener("touchend", (event) => {
-      touchEndX = event.changedTouches[0].screenX;
-      const difference = touchStartX - touchEndX;
-
-      if (Math.abs(difference) < 50) return;
-
-      if (difference > 0) {
-        if (currentSlide < slides.length - 1) {
-          showSlide(currentSlide + 1);
-        }
-      } else {
-        if (currentSlide > 0) {
-          showSlide(currentSlide - 1);
-        }
-      }
-    }, { passive: true });
-
-    /* ========================================
-       FLOATING PARTICLES
-    ======================================== */
-
     const particles = document.getElementById("particles");
 
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 45; i++) {
       const particle = document.createElement("div");
       particle.className = "particle";
+      const size = Math.random() * 5 + 2;
       particle.style.left = Math.random() * 100 + "%";
-      particle.style.animationDuration = 8 + Math.random() * 14 + "s";
-      particle.style.animationDelay = Math.random() * 12 + "s";
-      particle.style.opacity = Math.random() * 0.6 + 0.2;
+      particle.style.animationDuration = 10 + Math.random() * 18 + "s";
+      particle.style.animationDelay = Math.random() * 15 + "s";
+      particle.style.opacity = Math.random() * 0.5 + 0.15;
+      particle.style.width = size + "px";
+      particle.style.height = size + "px";
       particles.appendChild(particle);
     }
 
-  </script>
+    /* ========================================
+       KEYBOARD NAVIGATION
+    ======================================== */
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowDown" || event.key === " ") {
+        event.preventDefault();
+        timeline.scrollBy({ top: window.innerHeight * 0.65, behavior: "smooth" });
+      }
+      if (event.key === "ArrowUp") {
+        event.preventDefault();
+        timeline.scrollBy({ top: -window.innerHeight * 0.65, behavior: "smooth" });
+      }
+    });
 
+  </script>
 </body>
 </html>
